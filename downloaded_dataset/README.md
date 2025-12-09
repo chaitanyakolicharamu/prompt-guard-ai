@@ -22,6 +22,13 @@ The original prompt injection samples were curated from [Safe-Guard-Prompt-Injec
 
 - Emoji Smuggling modified prompts are stored as Base64 to ensure the original encoding is retained.
 - There are mixture of injected unicode characters which may cause some issues when dumped from JSON.
+APA Style:
+
+Jayavibhav. (2023). Prompt Injection Safety Dataset [Dataset]. Hugging Face. 
+https://huggingface.co/datasets/jayavibhav/prompt-injection-safety
+
+Mindgard. (2024). Evaded Prompt Injection and Jailbreak Samples [Dataset]. 
+Hugging Face. https://huggingface.co/datasets/Mindgard/evaded-prompt-injection-and-jailbreak-samples
 
 ### Links
 
