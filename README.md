@@ -1,183 +1,107 @@
-Prompt-Guard AI
-Systematic Detection of Prompt Injection and Jailbreak Attacks using Classical ML, Deep Neural Networks, and LLM Reasoning
+# Prompt-Guard AI
+## Prompt Injection & Jailbreak Detection using ML, Deep Learning, and LLM Reasoning
 
-Prompt-Guard AI is an end-to-end AI security research and engineering project focused on detecting prompt-injection and jailbreak attacks targeting Large Language Models (LLMs).
-The project performs a methodologically rigorous comparison between feature-based ML classifiers, sequence-aware deep neural models, transformer-based fine-tuned models, and LLM-native reasoning approaches, all evaluated on real-world adversarial datasets.
+Prompt-Guard AI is an end-to-end AI security project focused on detecting **prompt injection and jailbreak attacks** targeting Large Language Models (LLMs). The project systematically compares **classical machine learning**, **deep neural architectures**, **transformer-based fine-tuning**, and **LLM-native reasoning approaches** on the same security-critical task.
 
-Problem Context & Motivation
+---
 
-Prompt injection has emerged as a first-class security vulnerability in modern GenAI systems, enabling attackers to:
+## Background and Motivation
 
-Override system and developer instructions
+Prompt injection has emerged as a critical vulnerability in modern GenAI systems, allowing malicious users to override system instructions, bypass safety controls, and extract sensitive information. Unlike traditional NLP tasks, prompt injection detection must operate under adversarial intent, semantic obfuscation, and distribution shift.
 
-Exfiltrate hidden prompts or sensitive data
+This project explores which modeling paradigms are most effective and robust for prompt-level security enforcement.
 
-Bypass alignment and content safety layers
+---
 
-Induce unintended tool invocation or policy violations
+## Project Objectives
 
-Unlike traditional NLP classification tasks, prompt-injection detection must operate under distribution shift, adversarial intent, and semantic obfuscation.
-This project investigates which modeling paradigms are most robust under these constraints and how reasoning-based LLM approaches compare against learned discriminative models.
+- Design a binary prompt-level classifier for injection and jailbreak detection  
+- Implement and benchmark multiple AI paradigms on the same datasets  
+- Evaluate robustness against adversarial jailbreak prompts  
+- Compare precision, recall, and failure modes across approaches  
+- Demonstrate practical deployment via an interactive inference interface  
 
-Research Objectives
+---
 
-Design a binary prompt-level classification pipeline for injection and jailbreak detection
+## Modeling Approaches
 
-Implement and benchmark:
+### Classical and Neural Models
 
-Classical feature-based ML
+**Keyword Rule Baseline**  
+A deterministic heuristic detector used as a lower-bound reference.
 
-Recurrent neural architectures
+**TF-IDF + Logistic Regression**  
+A sparse lexical feature representation with a linear decision boundary, serving as a strong classical ML baseline with low inference cost.
 
-Transformer fine-tuning
+**BiLSTM (Bidirectional LSTM)**  
+A sequence-aware deep learning model capturing contextual and order-sensitive attack patterns that bag-of-words models fail to detect.
 
-LLM prompting and reasoning strategies
+**BERT Fine-Tuned (bert-base-uncased)**  
+A 12-layer transformer (~110M parameters) fine-tuned end-to-end for binary sequence classification. This model provides the highest robustness against adversarial jailbreak prompts.
 
-Evaluate generalization on adversarially curated jailbreak datasets
+---
 
-Analyze precision-recall trade-offs, robustness, and failure modes
+### LLM Reasoning-Based Detection
 
-Demonstrate practical deployment via an interactive inference UI
+The same task is evaluated using **Gemini 2.5 Flash** without gradient-based learning:
 
-Modeling Approaches
-Classical & Neural Discriminative Models
+- Zero-Shot Prompting  
+- Few-Shot Prompting with Chain-of-Thought  
+- Self-Consistency via multiple reasoning paths and majority voting  
 
-Keyword Rule Baseline
-A deterministic heuristic detector for establishing a lower-bound baseline.
+These methods assess the reasoning capability of LLMs as safety classifiers.
 
-TF-IDF + Logistic Regression
+---
 
-Sparse lexical representation using TF-IDF
+## Datasets
 
-Linear decision boundary optimized via log-loss
+**Prompt Injection Safety Dataset**  
+Source: `jayavibhav/prompt-injection-safety` (Hugging Face)  
+Used for training and validation. Contains labeled benign and malicious prompts.
 
-Serves as a strong classical ML baseline with low inference cost
+**Evaded Prompt Injection & Jailbreak Dataset**  
+Source: `Mindgard/evaded-prompt-injection-and-jailbreak-samples` (Hugging Face)  
+Used as an adversarial test set containing real-world jailbreak attempts.
 
-BiLSTM (Bidirectional LSTM)
+All datasets are normalized into a unified JSONL schema and split into training, validation, and test partitions.
 
-Learns sequential and contextual dependencies in prompt text
+---
 
-Captures order-sensitive attack patterns missed by bag-of-words models
+## Evaluation Methodology
 
-Trained with cross-entropy loss on balanced prompt distributions
+- Binary classification metrics:
+  - Accuracy
+  - Precision
+  - Recall
+  - F1-score
+- In-distribution validation evaluation  
+- Out-of-distribution adversarial testing  
+- Balanced evaluation subset for LLM prompting comparison  
 
-BERT Fine-Tuned (bert-base-uncased)
+---
 
-12-layer transformer (~110M parameters)
+## Key Findings
 
-Fine-tuned end-to-end for binary sequence classification
+- BERT fine-tuning achieves the highest accuracy and adversarial robustness  
+- BiLSTM offers strong performance with lower computational overhead  
+- TF-IDF + Logistic Regression remains a surprisingly competitive baseline  
+- LLM prompting methods exhibit high recall but lower precision, frequently over-flagging benign prompts  
 
-Achieves the highest robustness on adversarial jailbreak prompts
+Overall, neural classifiers are more reliable for detection, while LLMs are better suited for reasoning and explanation layers.
 
-Serves as the primary neural reference model
+---
 
-LLM-Native Reasoning Approaches (Gemini 2.5 Flash)
+## Interactive Demo
 
-The same task is solved without gradient-based learning, using prompt engineering:
+A Streamlit-based application enables real-time inference:
 
-Zero-Shot Classification
-Direct instruction-based inference without examples
-
-Few-Shot + Chain-of-Thought (CoT)
-Demonstrates attack reasoning using labeled exemplars
-
-Self-Consistency
-Multiple independent reasoning paths aggregated via majority vote
-
-These methods evaluate the reasoning capability of LLMs as safety classifiers rather than their generative performance.
-
-Datasets
-Prompt Injection Safety Dataset
-
-Source: jayavibhav/prompt-injection-safety (Hugging Face)
-
-Mixed benign and malicious prompts
-
-Used for training and validation
-
-Manually curated attack categories and benign instructions
-
-Evaded Prompt Injection & Jailbreak Dataset
-
-Source: Mindgard/evaded-prompt-injection-and-jailbreak-samples (Hugging Face)
-
-Real-world adversarial jailbreak prompts
-
-Designed to bypass naive safety filters
-
-Used exclusively as an out-of-distribution test set
-
-All datasets are normalized into a unified JSONL schema and split into training, validation, and adversarial test partitions.
-
-Evaluation Methodology
-
-Binary classification metrics:
-
-Accuracy
-
-Precision
-
-Recall
-
-F1-score
-
-Validation on in-distribution data
-
-Stress-testing on adversarial jailbreak samples
-
-Balanced evaluation subset for LLM prompting to ensure fair comparison
-
-Key Findings
-
-BERT fine-tuning delivers the strongest overall performance and adversarial robustness
-
-BiLSTM provides competitive accuracy with significantly lower computational overhead
-
-TF-IDF + Logistic Regression remains a surprisingly effective baseline
-
-LLM prompting methods exhibit:
-
-High recall (aggressive attack detection)
-
-Lower precision (over-flagging benign prompts)
-
-Results suggest that LLMs are better suited as reasoning and explanation layers, not primary detectors
-
-A hybrid architecture—neural classifiers for detection + LLMs for interpretability—is the most practical design pattern.
-
-System Demonstration
-
-A production-style Streamlit application enables real-time inference:
-
-Prompt input interface
-
-Parallel evaluation across all models
-
-Confidence scores and verdict aggregation
-
-Optional LLM reasoning visualization
+- User prompt input  
+- Parallel predictions across all models  
+- Confidence scores and final verdict aggregation  
+- Optional LLM reasoning output  
 
 Run locally:
 
+```bash
 streamlit run src/app/streamlit_app.py
 
-Engineering Stack
-
-Python
-
-PyTorch
-
-Hugging Face Transformers
-
-scikit-learn
-
-Streamlit
-
-Google Gemini API
-
-Google Cloud Storage (model artifacts)
-
-Repository Notes
-
-Due to GitHub size constraints, trained model artifacts (e.g., fine-tuned BERT weights) are stored externally.
-The repository contains complete, reproducible training and evaluation pipelines.
