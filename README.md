@@ -100,8 +100,7 @@ A Streamlit-based application enables real-time inference:
 - Confidence scores and final verdict aggregation  
 - Optional LLM reasoning output  
 
-Run locally:
-
-```bash
-streamlit run src/app/streamlit_app.py
+## Repository Notes
+Due to GitHub size constraints, trained model artifacts (e.g., fine-tuned BERT weights) are stored externally.
+The repository contains complete, reproducible training and evaluation pipelines.
 
