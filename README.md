@@ -1,4 +1,4 @@
-# Prompt-Guard AI bjb
+# Prompt-Guard AI
 ## Prompt Injection & Jailbreak Detection using ML, Deep Learning, and LLM Reasoning
 
 Prompt-Guard AI is an end-to-end AI security project focused on detecting **prompt injection and jailbreak attacks** targeting Large Language Models (LLMs). The project systematically compares **classical machine learning**, **deep neural architectures**, **transformer-based fine-tuning**, and **LLM-native reasoning approaches** on the same security-critical task.
