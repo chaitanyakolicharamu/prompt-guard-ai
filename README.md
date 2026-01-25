@@ -22,7 +22,7 @@ This project explores which modeling paradigms are most effective and robust for
 - Demonstrate practical deployment via an interactive inference interface  
 
 ---
-dfshdfn
+dfs
 ## Modeling Approaches
 
 ### Classical and Neural Models
