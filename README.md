@@ -11,8 +11,7 @@ Prompt injection has emerged as a critical vulnerability in modern GenAI systems
 
 This project explores which modeling paradigms are most effective and robust for prompt-level security enforcement.
 jlnkn;;n;
----
-
+-
 ## Project Objectives
 
 - Design a binary prompt-level classifier for injection and jailbreak detection  
