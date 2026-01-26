@@ -10,7 +10,7 @@ Prompt-Guard AI is an end-to-end AI security project focused on detecting **prom
 Prompt injection has emerged as a critical vulnerability in modern GenAI systems, allowing malicious users to override system instructions, bypass safety controls, and extract sensitive information. Unlike traditional NLP tasks, prompt injection detection must operate under adversarial intent, semantic obfuscation, and distribution shift.
 
 This project explores which modeling paradigms are most effective and robust for prompt-level security enforcement.
-jlnkn;
+jln
 -
 ## Project Objectives
 
