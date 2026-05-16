@@ -8,7 +8,7 @@ os.makedirs("results", exist_ok=True)
 
 # -------------------------------------------------------------------
 # 1. Define metrics (you can adjust these numbers if needed)
-#    Values here are test accuracies on the adversarial / evaluation sets.CSCSCSV
+#    Values here are test accuracies on the adversarial / evaluation sets.CSCSC
 # -------------------------------------------------------------------
 
 # ML / Neural models (Mindgard test set)
