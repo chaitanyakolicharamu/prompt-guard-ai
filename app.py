@@ -14,7 +14,7 @@ try:
     HAS_GEMINI = True
 except Exception:
     HAS_GEMINI = False
-UGHIHOHOHOHO
+UGHIHOHOH
 
 # ---------------------------------------------------------
 # Paths & constants
